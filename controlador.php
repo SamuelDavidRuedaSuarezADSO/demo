@@ -12,16 +12,21 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     if (!empty($_GET['apellido'])) {
       $apellido = $_GET['apellido'];
       $aprendiz->setApellido($apellido);
-      if (!empty($_GET["genero"]) && $_GET["genero"] == "Masculino" || $_GET["genero"] == "Femenino") {
-        $genero = $_GET['genero'];
-        $aprendiz->setGenero($_GET["genero"]);
-        if (!empty($_GET['edad'])) {
-          $edad = $_GET['edad'];
-          $aprendiz->setEdad($edad);
-          $aprendiz->Guardar();
-        } else {
-          echo "Error: ingresa un edad";
+      if(!empty($_GET["genero"])){
+        if ($_GET["genero"] == "Masculino" || $_GET["genero"] == "Femenino") {
+          $genero = $_GET['genero'];
+          $aprendiz->setGenero($_GET["genero"]);
+          if (!empty($_GET['edad'])) {
+            $edad = $_GET['edad'];
+            $aprendiz->setEdad($edad);
+            $aprendiz->Guardar();
+          } else {
+            echo "Error: ingresa un edad";
+          }
         }
+      }
+      else{
+        echo "Error: selecciona un genero";
       }
     } else {
       echo "Error: ingrese un apellido";
